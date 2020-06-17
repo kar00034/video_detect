@@ -177,7 +177,7 @@ namespace videodetect {
 			std::time(&rawtime);
 			timeinfo = std::localtime(&rawtime);
 			std::strftime(file_name, 80, "./record/video_%Y-%m-%d %Hh %Mm.mp4", timeinfo);
-
+			
 			if (btn_Streaming->Text == "스트리밍 중지") {
 				btn_Streaming->Text = "스트리밍 시작";
 				if (btn_recording->Text == "녹화 중지") btn_recording->Text = "녹화 시작";
@@ -192,6 +192,7 @@ namespace videodetect {
 			// 작동				
 			while (btn_Streaming->Text == "스트리밍 중지") {
 				capture.read(frame);
+				cv::flip(frame, frame, 1);
 
 				// 녹화
 				if (btn_recording->Text == "녹화 중지") {
